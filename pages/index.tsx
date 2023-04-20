@@ -1,3 +1,5 @@
+import CreateCompanyModal from "@/components/modals/CreateCompanyModal";
+
 const fakeData = [
   {
     name: 'empresa 1',
@@ -28,7 +30,7 @@ const fakeData = [
 function index() {
   return (
     <>
-
+      <CreateCompanyModal />
       <div className="flex justify-between p-10">
         <h1 className="text-3xl font-semibold text-sky-800">
           Empresas
