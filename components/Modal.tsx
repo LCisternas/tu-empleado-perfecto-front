@@ -8,14 +8,13 @@ interface Props {
   onSubmit?: () => void;
   title?: string;
   body?: React.ReactElement;
-  footer?: React.ReactElement;
   actionLabel: string;
   disabled?: boolean;
 }
 
 const Modal = ({
   isOpen, onClose, onSubmit,
-  title, body, footer,
+  title, body,
   actionLabel, disabled
 }: Props) => {
 
@@ -50,7 +49,7 @@ const Modal = ({
         z-50
         outline-none
         focus:outline-none
-        bg-neutral-800
+        backdrop-blur-sm
         bg-opacity-70
       ">
         <div
@@ -70,13 +69,13 @@ const Modal = ({
               h-full
               lg:h-auto
               border-0
-              rounded-lg
+              rounded-xl
               shadow-lg
               relative
               flex
               flex-col
               w-full
-              bg-black
+              bg-sky-800
               outline-none
               focus:outline-none
             "
@@ -100,16 +99,22 @@ const Modal = ({
               {body}
             </div>
             <div className="flex flex-col gap-2 p-10">
-              {/* <Button
-                disabled={disabled}
-                label={actionLabel}
-                secondary
-                fullwidth
-                large
-                onClick={handleSubmit}
-              /> */}
-              <button>hola</button>
-              {footer}
+              <button
+                className="
+                  text-sky-800
+                  font-bold
+                  bg-white
+                  rounded-xl
+                  py-3
+                  border-2
+                  border-white
+                  hover:bg-sky-800
+                  hover:text-white
+                  transition
+                "
+              >
+                {actionLabel}
+              </button>
             </div>
           </div>
         </div>

@@ -8,9 +8,11 @@ const CreateCompanyModal = () => {
 
   // const loginModal = useLoginModal();
   // const registerModal = useRegisterModal();
-  
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+
+  const [name, setName] = useState('');
+  const [direction, setDirection] = useState('');
+  const [rut, setRut] = useState('');
+  const [phone, setPhone] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const onToggle = useCallback(() => {
@@ -22,7 +24,7 @@ const CreateCompanyModal = () => {
 
   }, [isLoading])
 
-  const onSubmit = useCallback( async () => {
+  const onSubmit = useCallback(async () => {
     try {
       setIsLoading(true)
 
@@ -36,46 +38,47 @@ const CreateCompanyModal = () => {
   }, [])
 
   const bodyContent = (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-6">
       <input
-        placeholder="Email"
-        onChange={(e) => setEmail(e.target.value)}
-        value={email}
+        className="rounded-lg py-2 placeholder:text-center text-center text-sky-800 font-semibold"
+        placeholder="Nombre"
+        onChange={(e) => setName(e.target.value)}
+        value={name}
         disabled={isLoading}
       />
       <input
-        placeholder="Password"
-        onChange={(e) => setPassword(e.target.value)}
-        value={password}
+        className="rounded-lg py-2 placeholder:text-center text-center text-sky-800 font-semibold"
+        placeholder="Direccion"
+        onChange={(e) => setDirection(e.target.value)}
+        value={direction}
         disabled={isLoading}
       />
-    </div>
-  )
-
-  const footerContent = (
-    <div className="text-neutral-400 text-center mt-4">
-      <p>
-        First time using Twitter?
-        <span
-          className="text-white cursor-pointer hover:underline ml-2"
-          onClick={onToggle}
-        >
-          Create an account
-        </span>
-      </p>
+      <input
+        className="rounded-lg py-2 placeholder:text-center text-center text-sky-800 font-semibold"
+        placeholder="RUT"
+        onChange={(e) => setRut(e.target.value)}
+        value={rut}
+        disabled={isLoading}
+      />
+      <input
+        className="rounded-lg py-2 placeholder:text-center text-center text-sky-800 font-semibold"
+        placeholder="Telefono"
+        onChange={(e) => setPhone(e.target.value)}
+        value={phone}
+        disabled={isLoading}
+      />
     </div>
   )
 
   return (
     <Modal
       disabled={isLoading}
-      isOpen={true}
-      title="Login"
-      actionLabel="Sign In"
+      isOpen={false}
+      title="Crea tu empresa"
+      actionLabel="Crear empresa"
       // onClose={loginModal.onClose}
       onSubmit={onSubmit}
       body={bodyContent}
-      footer={footerContent}
     />
   )
 }

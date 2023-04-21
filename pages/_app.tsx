@@ -6,7 +6,6 @@ import CreateCompanyModal from '@/components/modals/CreateCompanyModal'
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <Layout>
-      {/* <CreateCompanyModal /> */}
       <Component {...pageProps} />
     </Layout>
   )
