@@ -1,11 +1,10 @@
-import { useCallback, useState } from "react";
-import Modal from "../Modal";
+import { useState, useCallback } from 'react';
+import Modal from '../Modal';
 
-const CreateCompanyModal = () => {
-
+const NewEmployeeModal = () => {
   const [name, setName] = useState('');
-  const [direction, setDirection] = useState('');
-  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [rut, setRut] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const onToggle = useCallback(() => {
@@ -41,16 +40,16 @@ const CreateCompanyModal = () => {
       />
       <input
         className="rounded-lg py-2 placeholder:text-center text-center text-sky-800 font-semibold"
-        placeholder="Direccion"
-        onChange={(e) => setDirection(e.target.value)}
-        value={direction}
+        placeholder="Email"
+        onChange={(e) => setEmail(e.target.value)}
+        value={email}
         disabled={isLoading}
       />
       <input
         className="rounded-lg py-2 placeholder:text-center text-center text-sky-800 font-semibold"
-        placeholder="Direccion"
-        onChange={(e) => setPhone(e.target.value)}
-        value={phone}
+        placeholder="RUT"
+        onChange={(e) => setRut(e.target.value)}
+        value={rut}
         disabled={isLoading}
       />
     </div>
@@ -60,8 +59,8 @@ const CreateCompanyModal = () => {
     <Modal
       disabled={isLoading}
       isOpen={false}
-      title="Crea tu empresa"
-      actionLabel="Crear empresa"
+      title="Añade a un nuevo empleado"
+      actionLabel="Añadir empleado"
       // onClose={loginModal.onClose}
       onSubmit={onSubmit}
       body={bodyContent}
@@ -69,4 +68,4 @@ const CreateCompanyModal = () => {
   )
 }
 
-export default CreateCompanyModal;
+export default NewEmployeeModal;

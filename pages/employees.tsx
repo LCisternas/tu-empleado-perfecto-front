@@ -1,4 +1,5 @@
 import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'
+import NewEmployeeModal from '@/components/modals/NewEmployeeModal'
 
 const fakeData = [
   {
@@ -53,7 +54,7 @@ const fakeEmployees = [
 function employees() {
   return (
     <div className="flex flex-col p-10">
-
+      <NewEmployeeModal />
       <div className="flex justify-between items-center pb-10">
         <h1 className="text-3xl font-semibold text-sky-800">
           {/* Seleciona una empresa para ver su empleados */}
