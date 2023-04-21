@@ -9,10 +9,8 @@ const CreateCompanyModal = () => {
   // const loginModal = useLoginModal();
   // const registerModal = useRegisterModal();
 
-  const [name, setName] = useState('');
-  const [direction, setDirection] = useState('');
-  const [rut, setRut] = useState('');
-  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const onToggle = useCallback(() => {
@@ -38,33 +36,19 @@ const CreateCompanyModal = () => {
   }, [])
 
   const bodyContent = (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-4">
       <input
         className="rounded-lg py-2 placeholder:text-center text-center text-sky-800 font-semibold"
         placeholder="Nombre"
-        onChange={(e) => setName(e.target.value)}
-        value={name}
+        onChange={(e) => setEmail(e.target.value)}
+        value={email}
         disabled={isLoading}
       />
       <input
         className="rounded-lg py-2 placeholder:text-center text-center text-sky-800 font-semibold"
         placeholder="Direccion"
-        onChange={(e) => setDirection(e.target.value)}
-        value={direction}
-        disabled={isLoading}
-      />
-      <input
-        className="rounded-lg py-2 placeholder:text-center text-center text-sky-800 font-semibold"
-        placeholder="RUT"
-        onChange={(e) => setRut(e.target.value)}
-        value={rut}
-        disabled={isLoading}
-      />
-      <input
-        className="rounded-lg py-2 placeholder:text-center text-center text-sky-800 font-semibold"
-        placeholder="Telefono"
-        onChange={(e) => setPhone(e.target.value)}
-        value={phone}
+        onChange={(e) => setPassword(e.target.value)}
+        value={password}
         disabled={isLoading}
       />
     </div>
