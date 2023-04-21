@@ -1,4 +1,5 @@
 import CreateCompanyModal from "@/components/modals/CreateCompanyModal";
+import { useRouter } from "next/router";
 
 const fakeData = [
   {
@@ -28,6 +29,9 @@ const fakeData = [
 ]
 
 function index() {
+
+  const router = useRouter();
+
   return (
     <>
       <CreateCompanyModal />
@@ -45,7 +49,9 @@ function index() {
           fakeData.map((company) => (
             <div
               key={company.rut}
-              className="border-2 border-sky-800 rounded-lg cursor-pointer hover:bg-sky-800 transition">
+              className="border-2 border-sky-800 rounded-lg cursor-pointer hover:bg-sky-800 transition"
+              onClick={() => router.push('/employees')}
+            >
               <h2 className="text-sky-800 font-bold text-2xl py-10 px-20 hover:text-white transition">
                 {company.name}
               </h2>
