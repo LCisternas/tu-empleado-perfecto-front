@@ -83,7 +83,7 @@ function employees() {
         {
           fakeEmployees.map((employee, idx) => (
             <div className='flex items-center justify-between py-5 px-10 mt-5 rounded-xl bg-sky-800 text-white'>
-              <ul className="flex justify-between items-center w-9/12">
+              <ul className="flex justify-between items-center w-full">
                 <li className="flex flex-col items-center text-lg font-semibold">
                   <span>Nombre</span>
                   {employee.name}
@@ -97,14 +97,6 @@ function employees() {
                   {employee.rut}
                 </li>
               </ul>
-              <div className='flex space-x-5'>
-                <button className='p-2 border-2 border-white rounded-xl hover:bg-white hover:text-sky-800 transition'>
-                  <AiOutlineEdit size={20} />
-                </button>
-                <button className='p-2 border-2 border-white rounded-xl hover:bg-white hover:text-sky-800 transition'>
-                  <AiOutlineDelete size={20} />
-                </button>
-              </div>
             </div>
           ))
         }

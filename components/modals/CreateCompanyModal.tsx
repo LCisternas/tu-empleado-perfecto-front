@@ -1,27 +1,40 @@
 import { useCallback, useState } from "react";
 import Modal from "../Modal";
+import axios from "axios";
 
-const CreateCompanyModal = () => {
+interface Props {
+  isOpen: boolean;
+  setIsOpen: (type: boolean) => void;
+}
+
+const CreateCompanyModal = ({ isOpen, setIsOpen }: Props) => {
 
   const [name, setName] = useState('');
   const [direction, setDirection] = useState('');
   const [phone, setPhone] = useState('');
+  const [rut, setRut] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const onToggle = useCallback(() => {
     if (isLoading) {
       return;
     }
-    // loginModal.onClose(); 
-    // registerModal.onOpen();
+    setIsOpen(false)
 
   }, [isLoading])
 
   const onSubmit = useCallback(async () => {
     try {
-      setIsLoading(true)
+      const form = new FormData()
+      form.append('name', name)
+      form.append('direction', direction)
+      form.append('rut', rut)
+      form.append('phone', phone)
+      console.log(form)
+      axios.post('http://127.0.0.1:8000/api/company/', form)
 
-      // loginModal.onClose()
+      // setIsLoading(true)
+      setIsOpen(false)
 
     } catch (error) {
       console.log(error)
@@ -48,9 +61,16 @@ const CreateCompanyModal = () => {
       />
       <input
         className="rounded-lg py-2 placeholder:text-center text-center text-sky-800 font-semibold"
-        placeholder="Direccion"
+        placeholder="Telefono"
         onChange={(e) => setPhone(e.target.value)}
         value={phone}
+        disabled={isLoading}
+      />
+      <input
+        className="rounded-lg py-2 placeholder:text-center text-center text-sky-800 font-semibold"
+        placeholder="Rut"
+        onChange={(e) => setRut(e.target.value)}
+        value={rut}
         disabled={isLoading}
       />
     </div>
@@ -59,10 +79,10 @@ const CreateCompanyModal = () => {
   return (
     <Modal
       disabled={isLoading}
-      isOpen={false}
+      isOpen={isOpen}
       title="Crea tu empresa"
       actionLabel="Crear empresa"
-      // onClose={loginModal.onClose}
+      onClose={onToggle}
       onSubmit={onSubmit}
       body={bodyContent}
     />

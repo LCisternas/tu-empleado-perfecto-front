@@ -1,62 +1,83 @@
-import CreateCompanyModal from "@/components/modals/CreateCompanyModal";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import axios from 'axios'
 
-const fakeData = [
-  {
-    name: 'empresa 1',
-    direction: 'aa',
-    rut: 123,
-    phone: '452342'
-  },
-  {
-    name: 'empresa 2',
-    direction: 'ss',
-    rut: 456,
-    phone: '485324895'
-  },
-  {
-    name: 'empresa 3',
-    direction: 'gg',
-    rut: 9859434,
-    phone: '2341234'
-  },
-  {
-    name: 'empresa 4',
-    direction: 'gg',
-    rut: 968472,
-    phone: '2341234'
-  },
-]
+
+interface CompanyProps {
+  id: number;
+  name: string;
+  phone: string;
+  rut: string;
+  direction: string;
+}
 
 function index() {
+  const client = axios.create({
+    baseURL: 'http://localhost:8000/api/company'
+  })
 
   const router = useRouter();
+  const [companies, setCompanies] = useState<CompanyProps[]>([]);
+
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
+
+  useEffect(() => {
+    async function getCompanies() {
+      const response = await client.get('/')
+      setCompanies(response.data)
+    }
+    getCompanies()
+  }, [])
+
+  console.log(companies)
 
   return (
     <>
-      <CreateCompanyModal />
+      {/* <CreateCompanyModal isOpen={isOpenModal} setIsOpen={setIsOpenModal} /> */}
       <div className="flex justify-between p-10">
         <h1 className="text-3xl font-semibold text-sky-800">
           Empresas
         </h1>
-        <button className="bg-sky-800 text-white p-3 rounded-lg font-semibold border-2 border-sky-800 hover:bg-white hover:text-sky-800 transition">
+        <button onClick={() => router.push('/newCompany')} className="bg-sky-800 text-white p-3 rounded-lg font-semibold border-2 border-sky-800 hover:bg-white hover:text-sky-800 transition">
           Crear nueva empresa
         </button>
       </div>
 
-      <div className="flex justify-between px-10 py-2">
+      <div className="flex flex-col justify-between px-10 py-2">
         {
-          fakeData.map((company) => (
-            <div
-              key={company.rut}
-              className="border-2 border-sky-800 rounded-lg cursor-pointer hover:bg-sky-800 transition"
-              onClick={() => router.push('/employees')}
-            >
-              <h2 className="text-sky-800 font-bold text-2xl py-10 px-20 hover:text-white transition">
-                {company.name}
-              </h2>
-            </div>
-          ))
+          companies.length > 0
+            ?
+            (
+              companies.map((company) => (
+                <button key={company.id} onClick={() => router.push(`/${company.name}`)} className='flex items-center justify-between py-5 px-10 mt-5 rounded-xl bg-sky-800 text-white'>
+                  <ul className="flex justify-between items-center w-full">
+                    <li className="flex flex-col items-center text-lg font-semibold">
+                      <span>Nombre</span>
+                      {company.name}
+                    </li>
+                    <li className="flex flex-col items-center text-lg font-semibold">
+                      <span>Direccion</span>
+                      {company.direction}
+                    </li>
+                    <li className="flex flex-col items-center">
+                      <span>RUT</span>
+                      {company.rut}
+                    </li>
+                    <li className="flex flex-col items-center">
+                      <span>Telefono</span>
+                      {company.phone}
+                    </li>
+                  </ul>
+                </button>
+              ))
+            )
+            :
+            (
+              <div>
+                <h3>Cargando...</h3>
+              </div>
+            )
         }
       </div>
 

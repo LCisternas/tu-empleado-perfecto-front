@@ -18,12 +18,12 @@ const Modal = ({
   actionLabel, disabled
 }: Props) => {
 
-  const handleClose = useCallback(() => {
-    if (disabled) {
-      return;
-    }
-    // onClose();
-  }, [disabled, onClose])
+  // const handleClose = useCallback(() => {
+  //   if (disabled) {
+  //     return;
+  //   }
+  //   onClose();
+  // }, [disabled, onClose])
 
   const handleSubmit = useCallback(() => {
     if (disabled) {
@@ -92,7 +92,7 @@ const Modal = ({
                   transition
                 "
               >
-                <AiOutlineClose size={20} color="white" onClick={handleClose} />
+                <AiOutlineClose size={20} color="white" onClick={onClose} />
               </button>
             </div>
             <div className="relative p-10 flex-auto">
@@ -112,6 +112,7 @@ const Modal = ({
                   hover:text-white
                   transition
                 "
+                onClick={onSubmit}
               >
                 {actionLabel}
               </button>
