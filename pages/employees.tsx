@@ -11,7 +11,7 @@ interface CompanyProps {
   direction: string;
 }
 
-function employees() {
+function GeneralEmployees() {
   const [companies, setCompanies] = useState<CompanyProps[]>([])
   const router = useRouter();
 
@@ -61,4 +61,4 @@ function employees() {
   )
 }
 
-export default employees;
+export default GeneralEmployees;

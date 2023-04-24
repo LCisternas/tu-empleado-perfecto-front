@@ -10,7 +10,7 @@ interface CompanyProps {
   direction: string;
 }
 
-const newEmployee = () => {
+const NewEmployee = () => {
   const router = useRouter();
   const { name } = router.query;
   const baseURLEmployee = 'https://tep-planetscale.herokuapp.com/api/employee/'
@@ -143,4 +143,4 @@ const newEmployee = () => {
   )
 }
 
-export default newEmployee
+export default NewEmployee

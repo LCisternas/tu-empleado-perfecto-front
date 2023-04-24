@@ -2,7 +2,7 @@ import axios from "axios"
 import { useState } from "react"
 import { useRouter } from 'next/router';
 
-const newCompany = () => {
+const NewCompany = () => {
   const router = useRouter();
   const baseURL = 'https://tep-planetscale.herokuapp.com/api/company/'
   const [name, setName] = useState('')
@@ -130,4 +130,4 @@ const newCompany = () => {
   )
 }
 
-export default newCompany
+export default NewCompany

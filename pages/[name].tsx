@@ -18,7 +18,7 @@ interface CompanyProps {
   direction: string;
 }
 
-function employees() {
+function Employees() {
   const router = useRouter();
   const { name } = router.query;
 
@@ -104,4 +104,4 @@ function employees() {
   )
 }
 
-export default employees;
+export default Employees;
