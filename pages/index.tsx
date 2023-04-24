@@ -11,12 +11,12 @@ interface CompanyProps {
   direction: string;
 }
 
-function index() {
+function Index() {
+  const router = useRouter();
   const client = axios.create({
     baseURL: 'https://tep-planetscale.herokuapp.com/api/company'
   })
 
-  const router = useRouter();
   const [companies, setCompanies] = useState<CompanyProps[]>([]);
 
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -85,4 +85,4 @@ function index() {
   )
 }
 
-export default index;
+export default Index;
