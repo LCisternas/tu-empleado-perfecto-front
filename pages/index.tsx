@@ -13,7 +13,7 @@ interface CompanyProps {
 
 function index() {
   const client = axios.create({
-    baseURL: 'http://localhost:8000/api/company'
+    baseURL: 'https://tep-planetscale.herokuapp.com/api/company'
   })
 
   const router = useRouter();

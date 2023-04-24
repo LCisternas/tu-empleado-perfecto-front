@@ -13,15 +13,15 @@ interface CompanyProps {
 const newEmployee = () => {
   const router = useRouter();
   const { name } = router.query;
-  const baseURLEmployee = 'http://localhost:8000/api/employee/'
-  const baseURLCompany = `http://localhost:8000/api/company`
+  const baseURLEmployee = 'https://tep-planetscale.herokuapp.com/api/employee/'
+  const baseURLCompany = 'https://tep-planetscale.herokuapp.com/api/company/'
   const [fullName, setFullName] = useState('')
   const [rut, setRut] = useState('')
   const [phone, setPhone] = useState('')
   const [company, setCompany] = useState<CompanyProps[]>([])
 
   const getCompanyInfo = async () => {
-    const response = await axios.get(`${baseURLCompany}/?name=${name}`)
+    const response = await axios.get(`${baseURLCompany}?name=${name}`)
     setCompany(response.data)
     console.log(response.data)
   }
@@ -34,7 +34,7 @@ const newEmployee = () => {
     form.append("phone", phone)
     axios.post(baseURLEmployee, form).then(response => {
       if (response.status === 201) {
-        router.push(`/${company[0].name}`)
+        router.push(`/${name}`)
       }
     }).catch(error => console.log(error))
   }

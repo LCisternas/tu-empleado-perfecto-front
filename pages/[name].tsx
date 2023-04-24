@@ -22,8 +22,8 @@ function employees() {
   const router = useRouter();
   const { name } = router.query;
 
-  const baseURLEmployee = 'http://localhost:8000/api/employee'
-  const baseURLCompany = 'http://localhost:8000/api/company'
+  const baseURLEmployee = 'https://tep-planetscale.herokuapp.com/api/employee'
+  const baseURLCompany = 'https://tep-planetscale.herokuapp.com/api/company'
 
   const [employees, setEmployees] = useState<EmployeeByCompanyProps[]>([])
   const [companyInfo, setCompanyInfo] = useState<CompanyProps[]>([])

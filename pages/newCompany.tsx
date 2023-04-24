@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 const newCompany = () => {
   const router = useRouter();
-  const baseURL = 'http://localhost:8000/api/company/'
+  const baseURL = 'https://tep-planetscale.herokuapp.com/api/company/'
   const [name, setName] = useState('')
   const [direction, setDirection] = useState('')
   const [rut, setRut] = useState('')
