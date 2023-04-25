@@ -1,35 +1,22 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useRouter } from 'next/router';
-
-interface CompanyProps {
-  id: number;
-  name: string;
-  phone: string;
-  rut: string;
-  direction: string;
-}
+import useOneCompany from "@/hooks/useOneCompany";
 
 const NewEmployee = () => {
   const router = useRouter();
   const { name } = router.query;
   const baseURLEmployee = 'https://tep-planetscale.herokuapp.com/api/employee/'
-  const baseURLCompany = 'https://tep-planetscale.herokuapp.com/api/company/'
   const [fullName, setFullName] = useState('')
   const [rut, setRut] = useState('')
   const [phone, setPhone] = useState('')
-  const [company, setCompany] = useState<CompanyProps[]>([])
 
-  const getCompanyInfo = async () => {
-    const response = await axios.get(`${baseURLCompany}?name=${name}`)
-    setCompany(response.data)
-    console.log(response.data)
-  }
+  const { companyInfo } = useOneCompany()
 
   const postEmployee = () => {
     const form = new FormData()
     form.append("full_name", fullName)
-    form.append("company", company[0].id.toString())
+    form.append("company", companyInfo[0].id.toString())
     form.append("rut", rut)
     form.append("phone", phone)
     axios.post(baseURLEmployee, form).then(response => {
@@ -38,10 +25,6 @@ const NewEmployee = () => {
       }
     }).catch(error => console.log(error))
   }
-
-  useEffect(() => {
-    getCompanyInfo()
-  }, [])
 
   return (
     <>
@@ -103,14 +86,14 @@ const NewEmployee = () => {
                 <input
                   className="rounded-lg py-2 placeholder:text-center text-center text-sky-800 font-semibold"
                   placeholder="RUT"
-                  type="text"
+                  type="number"
                   onChange={(e) => setRut(e.target.value)}
                   value={rut}
                 />
                 <input
                   className="rounded-lg py-2 placeholder:text-center text-center text-sky-800 font-semibold"
                   placeholder="Telefono"
-                  type="text"
+                  type="number"
                   onChange={(e) => setPhone(e.target.value)}
                   value={phone}
                 />

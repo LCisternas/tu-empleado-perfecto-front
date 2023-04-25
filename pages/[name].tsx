@@ -1,59 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import NewEmployeeModal from '@/components/modals/NewEmployeeModal'
 import { useRouter } from 'next/router'
-import axios from 'axios'
-
-interface EmployeeByCompanyProps {
-  company: number;
-  full_name: string;
-  id: number;
-  rut: string;
-  phone: string;
-}
-interface CompanyProps {
-  id: number;
-  name: string;
-  phone: string;
-  rut: string;
-  direction: string;
-}
+import useOneCompany from '@/hooks/useOneCompany'
+import useEmployee from '@/hooks/useEmployee'
 
 function Employees() {
   const router = useRouter();
-  const { name } = router.query;
+  const { name } = router.query
 
-  const baseURLEmployee = 'https://tep-planetscale.herokuapp.com/api/employee'
-  const baseURLCompany = 'https://tep-planetscale.herokuapp.com/api/company'
-
-  const [employees, setEmployees] = useState<EmployeeByCompanyProps[]>([])
-  const [companyInfo, setCompanyInfo] = useState<CompanyProps[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-
-  const getEmployeesByCompany = async () => {
-    const response = await axios.get(`${baseURLEmployee}/?company__name=${name}`)
-    console.log(response)
-    setIsLoading(false)
-    if (response.data.length === 0) {
-      setIsLoading(false)
-      return;
-    }
-    setEmployees(response.data)
-  }
-
-  const getCompanyInformation = async () => {
-    const response = await axios.get(`${baseURLCompany}/?name=${name}`)
-    setCompanyInfo(response.data)
-  }
-
-  useEffect(() => {
-    getEmployeesByCompany()
-    getCompanyInformation()
-  }, [])
-
+  const { companyInfo } = useOneCompany()
+  const { employees, isLoading } = useEmployee()
 
   return (
     <div className="flex flex-col p-10">
-      <NewEmployeeModal />
       <div className="flex justify-between items-center pb-10">
         <h1 className="text-3xl font-semibold text-sky-800">
           {companyInfo[0] && companyInfo[0].name}
@@ -81,16 +38,16 @@ function Employees() {
                 employees.map((employee) => (
                   <div key={employee.id} className='flex items-center justify-between py-5 px-10 mt-5 rounded-xl bg-sky-800 text-white'>
                     <ul className="flex justify-between items-center w-full">
-                      <li className="flex flex-col items-center text-lg font-semibold">
-                        <span>Nombre</span>
+                      <li className="flex flex-col items-center text-lg">
+                        <span className='font-semibold'>Nombre</span>
                         {employee.full_name}
                       </li>
-                      <li className="flex flex-col items-center text-lg font-semibold">
-                        <span>Rut</span>
+                      <li className="flex flex-col items-center text-lg">
+                        <span className='font-semibold'>Rut</span>
                         {employee.rut}
                       </li>
                       <li className="flex flex-col items-center">
-                        <span>Phone</span>
+                        <span className='font-semibold'>Phone</span>
                         {employee.phone}
                       </li>
                     </ul>
